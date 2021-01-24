@@ -17,6 +17,11 @@ class BaseTextFormField extends StatelessWidget {
   final String Function(String) validator;
   final void Function(String) onSaved;
   final void Function(String) onFieldSubmitted;
+  final bool autocorrect;
+  final Iterable<String> autofillHints;
+  final Widget Function(BuildContext,
+      {int currentLength, bool isFocused, int maxLength}) buildCounter;
+  final Color cursorColor;
 
   const BaseTextFormField({
     Key key,
@@ -36,6 +41,10 @@ class BaseTextFormField extends StatelessWidget {
     this.validator,
     this.onSaved,
     this.onFieldSubmitted,
+    this.autocorrect = true,
+    this.autofillHints,
+    this.buildCounter,
+    this.cursorColor,
   })  : obscureText = obscureText ?? false,
         super(key: key);
 
@@ -68,6 +77,10 @@ class BaseTextFormField extends StatelessWidget {
             keyboardType: keyboardType,
             enabled: enabled,
             initialValue: initialValue,
+            autocorrect: autocorrect,
+            autofillHints: autofillHints,
+            buildCounter: buildCounter,
+            cursorColor: cursorColor,
             style: TextStyle(
               color: Theme.of(context).textTheme.bodyText1.color,
             ),

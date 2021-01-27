@@ -1,4 +1,5 @@
-part of kgp_ui;
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class BaseTextFormField extends StatelessWidget {
   final String labelText;

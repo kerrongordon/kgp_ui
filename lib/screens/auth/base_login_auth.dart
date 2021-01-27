@@ -1,8 +1,14 @@
-// import 'package:flutter/material.dart';
-// import 'package:handys/routes/routes.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import '../../screens/base_screen.dart';
+import '../../core/base_text_form_field.dart';
+import '../../utils/field-focus-change.dart';
+import '../../validators/email-validator.dart';
+import '../../validators/password-validator.dart';
+import '../../components/base_footer_auth.dart';
 
-part of kgp_ui;
-
+/// Kgp UI Base Login Screen
 class BaseLoginAuth extends HookWidget {
   /// Page Text Title "Sign In"
   final String pageTitle;
@@ -44,11 +50,13 @@ class BaseLoginAuth extends HookWidget {
   /// GlobalKey<FormState> loginKey,
   /// String email,
   /// String password,
+  /// bool rememberMe,
   /// BuildContext context,
   final void Function({
     GlobalKey<FormState> loginKey,
     String email,
     String password,
+    bool rememberMe,
     BuildContext context,
   }) onSignInBtn;
 
@@ -72,7 +80,7 @@ class BaseLoginAuth extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rememberMe = useState<bool>(true);
+    final _rememberMe = useState<bool>(true);
     final _email = useState<String>();
     final _password = useState<String>();
 
@@ -122,13 +130,13 @@ class BaseLoginAuth extends HookWidget {
                       child: Row(
                         children: [
                           Switch(
-                            onChanged: (val) => rememberMe.value = val,
-                            value: rememberMe.value,
+                            onChanged: (val) => _rememberMe.value = val,
+                            value: _rememberMe.value,
                           ),
                           TextButton(
                             child: Text(labelTextRememberMe ?? 'Remember Me'),
                             onPressed: () =>
-                                rememberMe.value = !rememberMe.value,
+                                _rememberMe.value = !_rememberMe.value,
                           ),
                         ],
                       ),
@@ -154,6 +162,7 @@ class BaseLoginAuth extends HookWidget {
                         loginKey: _loginKey,
                         email: _email.value,
                         password: _password.value,
+                        rememberMe: _rememberMe.value,
                         context: context,
                       ),
                     ),

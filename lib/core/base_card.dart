@@ -1,4 +1,4 @@
-part of kgp_ui;
+import 'package:flutter/material.dart';
 
 class BaseCard extends StatelessWidget {
   final double elevation;

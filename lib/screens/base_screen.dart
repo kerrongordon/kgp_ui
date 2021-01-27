@@ -1,4 +1,5 @@
-part of kgp_ui;
+import 'package:flutter/material.dart';
+import '../components/base_screen_title.dart';
 
 class BaseScreen extends StatelessWidget {
   final bool disableScroll;

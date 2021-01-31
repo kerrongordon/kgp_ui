@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../../screens/base_screen.dart';
-import '../../core/base_text_form_field.dart';
-import '../../utils/field-focus-change.dart';
-import '../../validators/email-validator.dart';
-import '../../validators/password-validator.dart';
+import '../../core/base_email_form_field.dart';
+import '../../core/base_password_form_field.dart';
 import '../../components/base_footer_auth.dart';
 
 /// Kgp UI Base Login Screen
@@ -101,26 +99,19 @@ class BaseLoginAuth extends HookWidget {
             key: _loginKey,
             child: Column(
               children: [
-                BaseTextFormField(
-                  prefixIcon: Icon(Icons.alternate_email),
-                  keyboardType: TextInputType.emailAddress,
-                  labelText: labelTextemail ?? 'Email Address',
-                  validator: emailvalidatorFun ?? emailValidator,
+                BaseEmailFormField(
+                  labelTextemail: labelTextemail,
+                  emailvalidatorFun: emailvalidatorFun,
                   onSaved: (val) => _email.value = val,
                   focusNode: _emailFoce,
-                  onFieldSubmitted: (val) =>
-                      fieldFocusChange(context, _emailFoce, _passwordFoce),
+                  nextFocusNode: _passwordFoce,
                 ),
-                BaseTextFormField(
-                  prefixIcon: Icon(Icons.fingerprint),
-                  keyboardType: TextInputType.text,
-                  labelText: labelTextpassword ?? 'Password',
-                  obscureText: true,
-                  validator: passwordvalidatorFun ?? passwordValidator,
+                BasePasswordFormField(
+                  labelTextpassword: labelTextpassword,
+                  passwordvalidatorFun: passwordvalidatorFun,
                   onSaved: (val) => _password.value = val,
                   focusNode: _passwordFoce,
-                  onFieldSubmitted: (val) =>
-                      fieldFocusChange(context, _passwordFoce, _submitFoce),
+                  nextFocusNode: _submitFoce,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

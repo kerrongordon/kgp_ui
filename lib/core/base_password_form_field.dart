@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 import 'base_text_form_field.dart';
 import '../validators/password-validator.dart';
@@ -7,17 +6,19 @@ import '../utils/field-focus-change.dart';
 
 class BasePasswordFormField extends StatelessWidget {
   final String labelTextpassword;
-  final MultiValidator passwordvalidatorFun;
+  final String Function(String) passwordvalidatorFun;
   final void Function(String) onSaved;
   final FocusNode focusNode;
   final FocusNode nextFocusNode;
+  final void Function(String) onChanged;
 
   const BasePasswordFormField({
-    this.labelTextpassword,
-    this.passwordvalidatorFun,
+    @required this.labelTextpassword,
+    @required this.passwordvalidatorFun,
     @required this.onSaved,
-    this.focusNode,
-    this.nextFocusNode,
+    @required this.focusNode,
+    @required this.nextFocusNode,
+    this.onChanged,
   });
 
   @override
@@ -29,6 +30,7 @@ class BasePasswordFormField extends StatelessWidget {
       obscureText: true,
       validator: passwordvalidatorFun ?? passwordValidator,
       onSaved: onSaved,
+      onChanged: onChanged,
       focusNode: focusNode,
       onFieldSubmitted: (val) => fieldFocusChange(
         context,

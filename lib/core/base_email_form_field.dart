@@ -13,11 +13,11 @@ class BaseEmailFormField extends StatelessWidget {
   final FocusNode nextFocusNode;
 
   const BaseEmailFormField({
-    this.labelTextemail,
-    this.emailvalidatorFun,
+    @required this.labelTextemail,
+    @required this.emailvalidatorFun,
     @required this.onSaved,
-    this.focusNode,
-    this.nextFocusNode,
+    @required this.focusNode,
+    @required this.nextFocusNode,
   });
 
   @override

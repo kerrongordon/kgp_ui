@@ -36,7 +36,7 @@ class BasePasswordRestAuth extends HookWidget {
   /// String email,
   /// BuildContext context,
   final void Function({
-    GlobalKey<FormState> loginKey,
+    GlobalKey<FormState> resetKey,
     String email,
     BuildContext context,
   }) onSendBtn;
@@ -99,14 +99,16 @@ class BasePasswordRestAuth extends HookWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
-                  child: ElevatedButton.icon(
-                    focusNode: _submitFoce,
-                    icon: Icon(Icons.send),
-                    label: Text(labelTextSend ?? 'Send'),
-                    onPressed: () => onSendBtn(
-                      loginKey: _resetKey,
-                      email: _email.value,
-                      context: context,
+                  child: Builder(
+                    builder: (BuildContext context) => ElevatedButton.icon(
+                      focusNode: _submitFoce,
+                      icon: Icon(Icons.send),
+                      label: Text(labelTextSend ?? 'Send'),
+                      onPressed: () => onSendBtn(
+                        resetKey: _resetKey,
+                        email: _email.value,
+                        context: context,
+                      ),
                     ),
                   ),
                 ),

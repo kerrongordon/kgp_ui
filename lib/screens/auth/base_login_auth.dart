@@ -92,6 +92,7 @@ class BaseLoginAuth extends HookWidget {
         titleColor: Colors.white,
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
+        iconTheme: IconThemeData(color: Colors.white),
         child: Container(
           padding: const EdgeInsets.all(20),
           margin: const EdgeInsets.only(top: 50),

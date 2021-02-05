@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 
-class KgpUiLight {
-  final Color primaryColor;
-
-  KgpUiLight({
-    this.primaryColor,
-  });
-
+mixin KgpUiLight {
   static final ThemeData theme = _lightTheme();
   static final Color _primaryColor = Colors.green;
-  static final Color _backgroundColor =
-      const Color.fromRGBO(236, 240, 241, 1.0);
-  static final Color _textColor = const Color.fromRGBO(107, 124, 147, 1.0);
+  static const Color _backgroundColor = Color.fromRGBO(236, 240, 241, 1.0);
+  static const Color _textColor = Color.fromRGBO(107, 124, 147, 1.0);
 
   static ThemeData _lightTheme() {
-    TextTheme textTheme = TextTheme(
+    const TextTheme textTheme = TextTheme(
       subtitle1: TextStyle(color: _textColor),
       subtitle2: TextStyle(color: _textColor),
       headline1: TextStyle(color: _textColor),
@@ -29,11 +22,11 @@ class KgpUiLight {
       overline: TextStyle(color: _textColor),
     );
 
-    IconThemeData iconTheme = IconThemeData(
+    const IconThemeData iconTheme = IconThemeData(
       color: _textColor,
     );
 
-    AppBarTheme appBarTheme = AppBarTheme(
+    const AppBarTheme appBarTheme = AppBarTheme(
       brightness: Brightness.light,
       color: _backgroundColor,
       elevation: 0,
@@ -42,13 +35,13 @@ class KgpUiLight {
       iconTheme: iconTheme,
     );
 
-    FloatingActionButtonThemeData floatingActionButtonTheme =
+    final FloatingActionButtonThemeData floatingActionButtonTheme =
         FloatingActionButtonThemeData(
       backgroundColor: _primaryColor,
       elevation: 5.0,
     );
 
-    CardTheme cardTheme = CardTheme(
+    final CardTheme cardTheme = CardTheme(
       elevation: 3,
       color: Colors.white,
       shape: RoundedRectangleBorder(
@@ -72,12 +65,12 @@ class KgpUiLight {
       backgroundColor: _backgroundColor,
       cardTheme: cardTheme,
       accentColor: _primaryColor,
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         prefixStyle: TextStyle(
           color: _textColor,
         ),
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
+      bottomAppBarTheme: const BottomAppBarTheme(
         color: _backgroundColor,
       ),
       primaryTextTheme: textTheme,
@@ -93,8 +86,8 @@ class KgpUiLight {
             const EdgeInsets.symmetric(vertical: 12, horizontal: 60),
           ),
           shape: MaterialStateProperty.all<OutlinedBorder>(
-            RoundedRectangleBorder(
-              borderRadius: const BorderRadius.all(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
                 Radius.circular(30.0),
               ),
             ),

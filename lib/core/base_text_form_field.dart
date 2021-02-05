@@ -72,7 +72,6 @@ class BaseTextFormField extends StatelessWidget {
             inputFormatters: inputFormatters,
             focusNode: focusNode,
             controller: controller,
-            autofocus: false,
             onChanged: onChanged,
             obscureText: obscureText,
             keyboardType: keyboardType,
@@ -99,11 +98,11 @@ class BaseTextFormField extends StatelessWidget {
               fillColor: Theme.of(context).cardTheme.color,
               prefixText: prefixText,
               contentPadding: const EdgeInsets.all(0),
-              border: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(
-                  const Radius.circular(30.0),
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(30.0),
                 ),
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   width: 0,
                   style: BorderStyle.none,
                 ),

@@ -8,12 +8,13 @@ class BaseCard extends StatelessWidget {
   final Clip clipBehavior;
 
   const BaseCard({
+    Key key,
     this.elevation,
     this.child,
     this.color,
     this.shadowColor,
     this.clipBehavior,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +25,12 @@ class BaseCard extends StatelessWidget {
         elevation: elevation,
         shadowColor: shadowColor,
         clipBehavior: clipBehavior,
-        child: child,
-        shape: RoundedRectangleBorder(
-          borderRadius: const BorderRadius.all(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
             Radius.circular(30.0),
           ),
         ),
+        child: child,
       ),
     );
   }

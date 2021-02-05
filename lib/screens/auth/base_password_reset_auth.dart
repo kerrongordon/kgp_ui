@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
-import '../../utils/field-focus-change.dart';
-import '../../screens/base_screen.dart';
-import '../../validators/email-validator.dart';
-import '../../core/base_text_form_field.dart';
 import '../../components/base_footer_auth.dart';
+import '../../core/base_text_form_field.dart';
+import '../../screens/base_screen.dart';
+import '../../utils/field-focus-change.dart';
+import '../../validators/email-validator.dart';
 
 /// Kgp UI Base Password Rest
 class BasePasswordRestAuth extends HookWidget {
@@ -42,6 +42,7 @@ class BasePasswordRestAuth extends HookWidget {
   }) onSendBtn;
 
   BasePasswordRestAuth({
+    Key key,
     this.pageTitle,
     this.pageSubTitle,
     this.labelTextemail,
@@ -50,7 +51,7 @@ class BasePasswordRestAuth extends HookWidget {
     this.labelTextSignIn,
     this.labelTextSignIndetail,
     this.onSendBtn,
-  });
+  }) : super(key: key);
 
   final _resetKey = GlobalKey<FormState>();
 
@@ -66,7 +67,7 @@ class BasePasswordRestAuth extends HookWidget {
         titleColor: Colors.white,
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         child: Container(
           padding: const EdgeInsets.all(20),
           child: Form(
@@ -80,15 +81,15 @@ class BasePasswordRestAuth extends HookWidget {
                   ),
                   child: Text(
                     pageSubTitle ??
-                        'Don\'t worry. Resetting your password is easy, just tell us the email address you registered with.',
+                        "Don't worry. Resetting your password is easy, just tell us the email address you registered with.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 17,
                     ),
                   ),
                 ),
                 BaseTextFormField(
-                  prefixIcon: Icon(Icons.alternate_email),
+                  prefixIcon: const Icon(Icons.alternate_email),
                   keyboardType: TextInputType.emailAddress,
                   labelText: labelTextemail ?? 'Email address',
                   validator: emailvalidatorFun ?? emailValidator,
@@ -102,7 +103,7 @@ class BasePasswordRestAuth extends HookWidget {
                   child: Builder(
                     builder: (BuildContext context) => ElevatedButton.icon(
                       focusNode: _submitFoce,
-                      icon: Icon(Icons.send),
+                      icon: const Icon(Icons.send),
                       label: Text(labelTextSend ?? 'Send'),
                       onPressed: () => onSendBtn(
                         resetKey: _resetKey,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'base_text_form_field.dart';
-import '../validators/password-validator.dart';
 import '../utils/field-focus-change.dart';
+import '../validators/password-validator.dart';
+import 'base_text_form_field.dart';
 
 class BasePasswordFormField extends StatelessWidget {
   final String labelTextpassword;
@@ -13,18 +13,19 @@ class BasePasswordFormField extends StatelessWidget {
   final void Function(String) onChanged;
 
   const BasePasswordFormField({
+    Key key,
     @required this.labelTextpassword,
     @required this.passwordvalidatorFun,
     @required this.onSaved,
     @required this.focusNode,
     @required this.nextFocusNode,
     this.onChanged,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BaseTextFormField(
-      prefixIcon: Icon(Icons.fingerprint),
+      prefixIcon: const Icon(Icons.fingerprint),
       keyboardType: TextInputType.text,
       labelText: labelTextpassword ?? 'Password',
       obscureText: true,

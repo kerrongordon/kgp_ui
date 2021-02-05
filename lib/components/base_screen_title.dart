@@ -4,14 +4,12 @@ class BaseTitle extends StatelessWidget {
   final String title;
   final Color color;
 
-  const BaseTitle({this.title, this.color});
+  const BaseTitle({Key key, this.title, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Flexible(flex: 4, child: Container()),
         Flexible(

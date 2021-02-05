@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import '../../screens/base_screen.dart';
+
+import '../../components/base_footer_auth.dart';
 import '../../core/base_email_form_field.dart';
 import '../../core/base_password_form_field.dart';
-import '../../components/base_footer_auth.dart';
+import '../../screens/base_screen.dart';
 
 /// Kgp UI Base Login Screen
 class BaseLoginAuth extends HookWidget {
@@ -59,6 +60,7 @@ class BaseLoginAuth extends HookWidget {
   }) onSignInBtn;
 
   BaseLoginAuth({
+    Key key,
     this.pageTitle,
     this.labelTextemail,
     this.emailvalidatorFun,
@@ -72,7 +74,7 @@ class BaseLoginAuth extends HookWidget {
     this.onSignInBtn,
     this.labelTextRegister,
     this.labelTextRegisterdetail,
-  });
+  }) : super(key: key);
 
   final _loginKey = GlobalKey<FormState>();
 
@@ -92,7 +94,7 @@ class BaseLoginAuth extends HookWidget {
         titleColor: Colors.white,
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         child: Container(
           padding: const EdgeInsets.all(20),
           margin: const EdgeInsets.only(top: 50),
@@ -126,9 +128,9 @@ class BaseLoginAuth extends HookWidget {
                             value: _rememberMe.value,
                           ),
                           TextButton(
-                            child: Text(labelTextRememberMe ?? 'Remember Me'),
                             onPressed: () =>
                                 _rememberMe.value = !_rememberMe.value,
+                            child: Text(labelTextRememberMe ?? 'Remember Me'),
                           ),
                         ],
                       ),
@@ -136,9 +138,9 @@ class BaseLoginAuth extends HookWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
+                        onPressed: passwordResetBtn,
                         child:
                             Text(labelTextForgotPassword ?? 'Forgot Password?'),
-                        onPressed: passwordResetBtn,
                       ),
                     ),
                   ],
@@ -148,7 +150,7 @@ class BaseLoginAuth extends HookWidget {
                     padding: const EdgeInsets.only(top: 60, bottom: 30),
                     child: ElevatedButton.icon(
                       focusNode: _submitFoce,
-                      icon: Icon(Icons.vpn_key),
+                      icon: const Icon(Icons.vpn_key),
                       label: Text(labelTextSignIn ?? 'Sign In'),
                       onPressed: () => onSignInBtn(
                         loginKey: _loginKey,
@@ -162,7 +164,7 @@ class BaseLoginAuth extends HookWidget {
                 ),
                 FooterAuth(
                   action: labelTextRegister ?? 'Register',
-                  detail: labelTextRegisterdetail ?? 'Don\'t Have an Account?',
+                  detail: labelTextRegisterdetail ?? "Don't Have an Account?",
                   onTap: registerBtn,
                 ),
               ],

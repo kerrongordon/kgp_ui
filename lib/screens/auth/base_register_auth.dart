@@ -4,9 +4,9 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:kgp_ui/core/base_email_form_field.dart';
 import 'package:kgp_ui/core/base_password_form_field.dart';
 
-import '../base_screen.dart';
 import '../../components/base_footer_auth.dart';
 import '../../validators/password-validator.dart';
+import '../base_screen.dart';
 
 class BaseRegisterAuth extends HookWidget {
   /// Page Text Title "Register"
@@ -31,6 +31,7 @@ class BaseRegisterAuth extends HookWidget {
   final MultiValidator passwordvalidatorConfromFun;
 
   BaseRegisterAuth({
+    Key key,
     this.pageTitle,
     this.labelTextemail,
     this.emailvalidatorFun,
@@ -38,7 +39,7 @@ class BaseRegisterAuth extends HookWidget {
     this.passwordvalidatorFun,
     this.labelTextpasswordConfrom,
     this.passwordvalidatorConfromFun,
-  });
+  }) : super(key: key);
 
   final _registerKey = GlobalKey<FormState>();
 
@@ -60,7 +61,7 @@ class BaseRegisterAuth extends HookWidget {
         titleColor: Colors.white,
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         child: Container(
           padding: const EdgeInsets.all(20),
           margin: const EdgeInsets.only(top: 50),
@@ -95,14 +96,16 @@ class BaseRegisterAuth extends HookWidget {
                   padding: const EdgeInsets.only(top: 60, bottom: 30),
                   child: ElevatedButton.icon(
                     focusNode: _submitFoce,
-                    icon: Icon(Icons.assignment),
-                    label: Text('Register'),
+                    icon: const Icon(Icons.assignment),
+                    label: const Text('Register'),
                     onPressed: () {
                       if (!_registerKey.currentState.validate()) return;
 
                       _registerKey.currentState.save();
 
+                      // ignore: avoid_print
                       print(_email.value);
+                      // ignore: avoid_print
                       print(_password.value);
                       _registerKey.currentState.reset();
                     },

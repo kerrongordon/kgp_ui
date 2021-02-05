@@ -17,6 +17,7 @@ class BaseScreen extends StatelessWidget {
   final List<Widget> actions;
 
   const BaseScreen({
+    Key key,
     this.disableScroll,
     @required this.title,
     this.expandedHeight,
@@ -30,7 +31,8 @@ class BaseScreen extends StatelessWidget {
     this.actionsIconTheme,
     this.iconTheme,
     this.shape,
-  }) : assert(title != null, 'Title is required');
+  })  : assert(title != null, 'Title is required'),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,6 @@ class BaseScreen extends StatelessWidget {
         SliverAppBar(
           expandedHeight: expandedHeight ?? media.size.height / 2.5,
           pinned: true,
-          floating: false,
           elevation: elevation,
           actions: actions,
           brightness: brightness,

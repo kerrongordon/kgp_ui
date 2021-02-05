@@ -6,10 +6,11 @@ class FooterAuth extends StatelessWidget {
   final String detail;
 
   const FooterAuth({
+    Key key,
     this.onTap,
     this.action,
     this.detail,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class FooterAuth extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: TextButton(
+        onPressed: onTap,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -31,7 +33,6 @@ class FooterAuth extends StatelessWidget {
             ),
           ],
         ),
-        onPressed: onTap,
       ),
     );
   }

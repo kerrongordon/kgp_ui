@@ -22,6 +22,13 @@ class BasePasswordFormField extends StatelessWidget {
     this.onChanged,
   }) : super(key: key);
 
+  String Function(String) validator() {
+    if (passwordvalidatorFun == null) {
+      return passwordValidator;
+    }
+    return passwordvalidatorFun;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseTextFormField(
@@ -29,7 +36,7 @@ class BasePasswordFormField extends StatelessWidget {
       keyboardType: TextInputType.text,
       labelText: labelTextpassword ?? 'Password',
       obscureText: true,
-      validator: passwordvalidatorFun ?? passwordValidator,
+      validator: validator(),
       onSaved: onSaved,
       onChanged: onChanged,
       focusNode: focusNode,

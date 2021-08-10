@@ -10,4 +10,4 @@ export 'screens/auth/base_password_reset_auth.dart';
 export 'screens/auth/base_register_auth.dart';
 export 'screens/base_screen.dart';
 export 'screens/base_screen.dart';
-export 'themes/light-theme.dart';
+export 'themes/light-theme.dart' show KgpUiLight;

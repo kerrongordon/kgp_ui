@@ -54,7 +54,7 @@ class BaseTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 4, bottom: 4),
       child: Stack(
-        overflow: Overflow.visible,
+        clipBehavior: Clip.none,
         children: <Widget>[
           Positioned(
             top: -3.9,
@@ -92,7 +92,7 @@ class BaseTextFormField extends StatelessWidget {
               labelText: labelText,
               floatingLabelBehavior: FloatingLabelBehavior.never,
               filled: true,
-              helperText: ' ',
+              helperText: '',
               prefixIcon: prefixIcon,
               errorText: errorText,
               fillColor: Theme.of(context).cardTheme.color,

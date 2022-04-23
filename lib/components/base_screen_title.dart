@@ -4,7 +4,11 @@ class BaseTitle extends StatelessWidget {
   final String title;
   final Color color;
 
-  const BaseTitle({Key key, this.title, this.color}) : super(key: key);
+  const BaseTitle({
+    Key? key,
+    required this.title,
+    required this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

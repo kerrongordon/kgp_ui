@@ -15,7 +15,7 @@ final passwordValidator = MultiValidator([
   ),
 ]);
 
-String passwordCon(
+String? passwordCon(
   String val,
   String password,
 ) {

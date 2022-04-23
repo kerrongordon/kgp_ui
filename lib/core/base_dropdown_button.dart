@@ -8,11 +8,11 @@ class BaseDropdownButton extends StatefulWidget {
   final List<DropdownMenuItem<String>> items;
 
   const BaseDropdownButton({
-    Key key,
-    this.items,
-    this.icon,
-    @required this.initial,
-    this.onChanged,
+    Key? key,
+    required this.items,
+    required this.icon,
+    required this.initial,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -20,18 +20,12 @@ class BaseDropdownButton extends StatefulWidget {
 }
 
 class _BaseDropdownButtonState extends State<BaseDropdownButton> {
-  String _dropList;
+  late String _dropList;
 
   @override
   void initState() {
     super.initState();
     _dropList = widget.initial;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _dropList = null;
   }
 
   @override
@@ -54,7 +48,7 @@ class _BaseDropdownButtonState extends State<BaseDropdownButton> {
                 items: widget.items,
                 value: _dropList,
                 onChanged: (update) {
-                  _dropList = update;
+                  _dropList = update!;
                   return widget.onChanged(update);
                 },
               ),

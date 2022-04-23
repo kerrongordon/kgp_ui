@@ -12,37 +12,37 @@ class BaseLoginAuth extends StatefulWidget {
   final String pageTitle;
 
   /// Email Text Title "Email Address"
-  final String labelTextemail;
+  final String? labelTextemail;
 
   /// Email Validator using MultiValidator
-  final MultiValidator emailvalidatorFun;
+  final MultiValidator? emailvalidatorFun;
 
   /// Password Text Title "Password"
-  final String labelTextpassword;
+  final String? labelTextpassword;
 
   /// Password Validator using MultiValidator
-  final MultiValidator passwordvalidatorFun;
+  final MultiValidator? passwordvalidatorFun;
 
   /// Password Rest Button route
-  final void Function() passwordResetBtn;
+  final void Function()? passwordResetBtn;
 
   /// Register Button route
-  final void Function() registerBtn;
+  final void Function()? registerBtn;
 
   /// Remember Me Text title "Remember Me"
-  final String labelTextRememberMe;
+  final String? labelTextRememberMe;
 
   /// Forgot Password Text title "Forgot Password?"
-  final String labelTextForgotPassword;
+  final String? labelTextForgotPassword;
 
   /// Sign In Text title "Sign In"
-  final String labelTextSignIn;
+  final String? labelTextSignIn;
 
   /// Register Text title "Register"
-  final String labelTextRegister;
+  final String? labelTextRegister;
 
   /// Register detail Text title "Don\'t Have an Account?"
-  final String labelTextRegisterdetail;
+  final String? labelTextRegisterdetail;
 
   /// Sign In Function Button
   /// GlobalKey<FormState> loginKey,
@@ -56,11 +56,11 @@ class BaseLoginAuth extends StatefulWidget {
     String password,
     bool rememberMe,
     BuildContext context,
-  }) onSignInBtn;
+  })? onSignInBtn;
 
   const BaseLoginAuth({
-    Key key,
-    this.pageTitle,
+    Key? key,
+    this.pageTitle = 'Sign In',
     this.labelTextemail,
     this.emailvalidatorFun,
     this.labelTextpassword,
@@ -83,12 +83,12 @@ class _BaseLoginAuthState extends State<BaseLoginAuth> {
   final _loginKey = GlobalKey<FormState>();
 
   bool _rememberMe = true;
-  String _email;
-  String _password;
+  late String _email;
+  late String _password;
 
-  FocusNode _emailFoce;
-  FocusNode _passwordFoce;
-  FocusNode _submitFoce;
+  late FocusNode _emailFoce;
+  late FocusNode _passwordFoce;
+  late FocusNode _submitFoce;
 
   @override
   void initState() {
@@ -114,7 +114,7 @@ class _BaseLoginAuthState extends State<BaseLoginAuth> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BaseScreen(
-        title: widget.pageTitle ?? 'Sign In',
+        title: widget.pageTitle,
         titleColor: Colors.white,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Theme.of(context).primaryColor,
@@ -127,16 +127,16 @@ class _BaseLoginAuthState extends State<BaseLoginAuth> {
             child: Column(
               children: [
                 BaseEmailFormField(
-                  labelTextemail: widget.labelTextemail,
-                  emailvalidatorFun: widget.emailvalidatorFun,
-                  onSaved: (val) => _email = val,
+                  labelTextemail: widget.labelTextemail!,
+                  emailvalidatorFun: widget.emailvalidatorFun!,
+                  onSaved: (val) => _email = val!,
                   focusNode: _emailFoce,
                   nextFocusNode: _passwordFoce,
                 ),
                 BasePasswordFormField(
-                  labelTextpassword: widget.labelTextpassword,
-                  passwordvalidatorFun: widget.passwordvalidatorFun,
-                  onSaved: (val) => _password = val,
+                  labelTextpassword: widget.labelTextpassword!,
+                  passwordvalidatorFun: widget.passwordvalidatorFun!,
+                  onSaved: (val) => _password = val!,
                   focusNode: _passwordFoce,
                   nextFocusNode: _submitFoce,
                 ),
@@ -178,7 +178,7 @@ class _BaseLoginAuthState extends State<BaseLoginAuth> {
                       focusNode: _submitFoce,
                       icon: const Icon(Icons.vpn_key),
                       label: Text(widget.labelTextSignIn ?? 'Sign In'),
-                      onPressed: () => widget.onSignInBtn(
+                      onPressed: () => widget.onSignInBtn!(
                         loginKey: _loginKey,
                         email: _email,
                         password: _password,
@@ -192,7 +192,7 @@ class _BaseLoginAuthState extends State<BaseLoginAuth> {
                   action: widget.labelTextRegister ?? 'Register',
                   detail: widget.labelTextRegisterdetail ??
                       "Don't Have an Account?",
-                  onTap: widget.registerBtn,
+                  onTap: widget.registerBtn!,
                 ),
               ],
             ),

@@ -1,40 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class BaseTextFormField extends StatelessWidget {
   final String labelText;
-  final String prefixText;
-  final String errorText;
-  final String initialValue;
-  final Widget prefixIcon;
-  final bool obscureText;
-  final bool enabled;
-  final FocusNode focusNode;
+  final String? prefixText;
+  final String? errorText;
+  final String? initialValue;
+  final Widget? prefixIcon;
+  final bool? obscureText;
+  final bool? enabled;
+  final FocusNode? focusNode;
   final TextInputType keyboardType;
-  final TextEditingController controller;
-  final void Function(String) onChanged;
-  final TextInputAction textInputAction;
-  final List<TextInputFormatter> inputFormatters;
-  final String Function(String) validator;
-  final void Function(String) onSaved;
-  final void Function(String) onFieldSubmitted;
-  final bool autocorrect;
-  final Iterable<String> autofillHints;
-  final Widget Function(
+  final TextEditingController? controller;
+  final void Function(String)? onChanged;
+  final TextInputAction? textInputAction;
+  final List<TextInputFormatter>? inputFormatters;
+  final MultiValidator? validator;
+  final void Function(String?)? onSaved;
+  final void Function(String)? onFieldSubmitted;
+  final bool? autocorrect;
+  final Iterable<String>? autofillHints;
+  Widget? Function(
     BuildContext, {
-    int currentLength,
-    bool isFocused,
-    int maxLength,
-  }) buildCounter;
-  final Color cursorColor;
+    required int currentLength,
+    required bool isFocused,
+    required int? maxLength,
+  })? buildCounter;
+  final Color? cursorColor;
 
-  const BaseTextFormField({
-    Key key,
-    @required this.labelText,
-    @required this.prefixIcon,
+  BaseTextFormField({
+    Key? key,
+    required this.labelText,
+    required this.prefixIcon,
     this.prefixText,
-    bool obscureText,
-    @required this.keyboardType,
+    this.obscureText = false,
+    required this.keyboardType,
     this.controller,
     this.inputFormatters,
     this.onChanged,
@@ -50,8 +51,7 @@ class BaseTextFormField extends StatelessWidget {
     this.autofillHints,
     this.buildCounter,
     this.cursorColor,
-  })  : obscureText = obscureText ?? false,
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,18 +77,18 @@ class BaseTextFormField extends StatelessWidget {
             focusNode: focusNode,
             controller: controller,
             onChanged: onChanged,
-            obscureText: obscureText,
+            obscureText: obscureText!,
             keyboardType: keyboardType,
             enabled: enabled,
             initialValue: initialValue,
-            autocorrect: autocorrect,
+            autocorrect: autocorrect!,
             autofillHints: autofillHints,
             buildCounter: buildCounter,
             cursorColor: cursorColor,
             style: TextStyle(
-              color: Theme.of(context).textTheme.bodyText1.color,
+              color: Theme.of(context).textTheme.bodyText1!.color,
             ),
-            validator: validator,
+            validator: validator!,
             onSaved: onSaved,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             onFieldSubmitted: onFieldSubmitted,

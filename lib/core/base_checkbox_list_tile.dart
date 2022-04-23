@@ -7,11 +7,11 @@ class BaseCheckboxListTile extends StatefulWidget {
   final void Function(bool) onChanged;
 
   const BaseCheckboxListTile({
-    Key key,
-    this.title,
-    @required this.onChanged,
-    this.initial,
-    this.subtitle,
+    Key? key,
+    required this.title,
+    required this.onChanged,
+    this.initial = false,
+    required this.subtitle,
   }) : super(key: key);
 
   @override
@@ -19,18 +19,12 @@ class BaseCheckboxListTile extends StatefulWidget {
 }
 
 class _BaseCheckboxListTileState extends State<BaseCheckboxListTile> {
-  bool _checkbox;
+  late bool _checkbox;
 
   @override
   void initState() {
     super.initState();
-    _checkbox = widget.initial ?? false;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _checkbox = null;
+    _checkbox = widget.initial;
   }
 
   @override
@@ -39,7 +33,7 @@ class _BaseCheckboxListTileState extends State<BaseCheckboxListTile> {
       title: widget.title,
       subtitle: widget.subtitle,
       onChanged: (value) {
-        _checkbox = value;
+        _checkbox = value!;
         return widget.onChanged(value);
       },
       value: _checkbox,

@@ -1,41 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:kgp_ui/core/base_text_form_field.dart';
 import 'package:kgp_ui/utils/field-focus-change.dart';
 import 'package:kgp_ui/validators/password-validator.dart';
 
 class BasePasswordFormField extends StatelessWidget {
   final String labelTextpassword;
-  final String Function(String) passwordvalidatorFun;
-  final void Function(String) onSaved;
+  final MultiValidator passwordvalidatorFun;
+  final void Function(String?) onSaved;
   final FocusNode focusNode;
   final FocusNode nextFocusNode;
-  final void Function(String) onChanged;
+  final void Function(String?)? onChanged;
 
   const BasePasswordFormField({
-    Key key,
-    @required this.labelTextpassword,
-    @required this.passwordvalidatorFun,
-    @required this.onSaved,
-    @required this.focusNode,
-    @required this.nextFocusNode,
+    Key? key,
+    this.labelTextpassword = 'Password',
+    required this.passwordvalidatorFun,
+    required this.onSaved,
+    required this.focusNode,
+    required this.nextFocusNode,
     this.onChanged,
   }) : super(key: key);
-
-  String Function(String) validator() {
-    if (passwordvalidatorFun == null) {
-      return passwordValidator;
-    }
-    return passwordvalidatorFun;
-  }
 
   @override
   Widget build(BuildContext context) {
     return BaseTextFormField(
       prefixIcon: const Icon(Icons.fingerprint),
       keyboardType: TextInputType.text,
-      labelText: labelTextpassword ?? 'Password',
+      labelText: labelTextpassword,
       obscureText: true,
-      validator: validator(),
+      validator: passwordValidator,
       onSaved: onSaved,
       onChanged: onChanged,
       focusNode: focusNode,

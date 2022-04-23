@@ -5,33 +5,32 @@ import 'package:kgp_ui/components/base_footer_auth.dart';
 import 'package:kgp_ui/core/base_email_form_field.dart';
 import 'package:kgp_ui/core/base_password_form_field.dart';
 import 'package:kgp_ui/screens/base_screen.dart';
-import 'package:kgp_ui/validators/password-validator.dart';
 
 class BaseRegisterAuth extends StatefulWidget {
   /// Page Text Title "Register"
   final String pageTitle;
 
   /// Email Text Title "Email Address"
-  final String labelTextemail;
+  final String? labelTextemail;
 
   /// Email Validator using MultiValidator
-  final MultiValidator emailvalidatorFun;
+  final MultiValidator? emailvalidatorFun;
 
   /// Password Text Title "Password"
-  final String labelTextpassword;
+  final String? labelTextpassword;
 
   /// Password Validator using MultiValidator
-  final MultiValidator passwordvalidatorFun;
+  final MultiValidator? passwordvalidatorFun;
 
   /// Password Text Title "Password"
-  final String labelTextpasswordConfrom;
+  final String? labelTextpasswordConfrom;
 
   /// Password Validator using MultiValidator
-  final MultiValidator passwordvalidatorConfromFun;
+  final MultiValidator? passwordvalidatorConfromFun;
 
   const BaseRegisterAuth({
-    Key key,
-    this.pageTitle,
+    Key? key,
+    this.pageTitle = 'Register',
     this.labelTextemail,
     this.emailvalidatorFun,
     this.labelTextpassword,
@@ -47,15 +46,15 @@ class BaseRegisterAuth extends StatefulWidget {
 class _BaseRegisterAuthState extends State<BaseRegisterAuth> {
   final _registerKey = GlobalKey<FormState>();
 
-  String _email;
-  String _password;
-  String _passwordCon;
-  String _passwordOnChange;
+  late String _email;
+  late String _password;
+  late String _passwordCon;
+  late String _passwordOnChange;
 
-  FocusNode _emailFoce;
-  FocusNode _passwordFoce;
-  FocusNode _passwordConFoce;
-  FocusNode _submitFoce;
+  late FocusNode _emailFoce;
+  late FocusNode _passwordFoce;
+  late FocusNode _passwordConFoce;
+  late FocusNode _submitFoce;
 
   @override
   void initState() {
@@ -87,7 +86,7 @@ class _BaseRegisterAuthState extends State<BaseRegisterAuth> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BaseScreen(
-        title: widget.pageTitle ?? 'Register',
+        title: widget.pageTitle,
         titleColor: Colors.white,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -100,25 +99,24 @@ class _BaseRegisterAuthState extends State<BaseRegisterAuth> {
             child: Column(
               children: [
                 BaseEmailFormField(
-                  labelTextemail: widget.labelTextemail,
-                  emailvalidatorFun: widget.emailvalidatorFun,
-                  onSaved: (val) => _email = val,
+                  labelTextemail: widget.labelTextemail!,
+                  emailvalidatorFun: widget.emailvalidatorFun!,
+                  onSaved: (val) => _email = val!,
                   focusNode: _emailFoce,
                   nextFocusNode: _passwordFoce,
                 ),
                 BasePasswordFormField(
-                  labelTextpassword: widget.labelTextpassword,
-                  passwordvalidatorFun: widget.passwordvalidatorFun,
-                  onSaved: (val) => _password = val,
-                  onChanged: (val) => _passwordOnChange = val,
+                  labelTextpassword: widget.labelTextpassword!,
+                  passwordvalidatorFun: widget.passwordvalidatorFun!,
+                  onSaved: (val) => _password = val!,
+                  onChanged: (val) => _passwordOnChange = val!,
                   focusNode: _passwordFoce,
                   nextFocusNode: _passwordConFoce,
                 ),
                 BasePasswordFormField(
-                  labelTextpassword: widget.labelTextpasswordConfrom,
-                  passwordvalidatorFun: (val) =>
-                      passwordCon(val, _passwordOnChange),
-                  onSaved: (val) => _passwordCon = val,
+                  labelTextpassword: widget.labelTextpasswordConfrom!,
+                  passwordvalidatorFun: widget.passwordvalidatorFun!,
+                  onSaved: (val) => _passwordCon = val!,
                   focusNode: _passwordConFoce,
                   nextFocusNode: _submitFoce,
                 ),
@@ -129,9 +127,9 @@ class _BaseRegisterAuthState extends State<BaseRegisterAuth> {
                     icon: const Icon(Icons.assignment),
                     label: const Text('Register'),
                     onPressed: () {
-                      if (!_registerKey.currentState.validate()) return;
+                      if (!_registerKey.currentState!.validate()) return;
 
-                      _registerKey.currentState.save();
+                      _registerKey.currentState!.save();
 
                       // ignore: avoid_print
                       print(_email);
@@ -139,7 +137,7 @@ class _BaseRegisterAuthState extends State<BaseRegisterAuth> {
                       print(_password);
                       // ignore: avoid_print
                       print(_passwordCon);
-                      _registerKey.currentState.reset();
+                      _registerKey.currentState!.reset();
                     },
                   ),
                 ),

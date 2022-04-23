@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class BaseCard extends StatelessWidget {
-  final double elevation;
+  final double? elevation;
   final Widget child;
-  final Color shadowColor;
-  final Color color;
-  final Clip clipBehavior;
+  final Color? shadowColor;
+  final Color? color;
+  final Clip? clipBehavior;
 
   const BaseCard({
-    Key key,
+    Key? key,
     this.elevation,
-    this.child,
+    required this.child,
     this.color,
     this.shadowColor,
     this.clipBehavior,

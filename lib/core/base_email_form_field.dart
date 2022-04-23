@@ -7,17 +7,17 @@ import 'package:kgp_ui/validators/email-validator.dart';
 class BaseEmailFormField extends StatelessWidget {
   final String labelTextemail;
   final MultiValidator emailvalidatorFun;
-  final void Function(String) onSaved;
+  final void Function(String?) onSaved;
   final FocusNode focusNode;
   final FocusNode nextFocusNode;
 
   const BaseEmailFormField({
-    Key key,
-    @required this.labelTextemail,
-    @required this.emailvalidatorFun,
-    @required this.onSaved,
-    @required this.focusNode,
-    @required this.nextFocusNode,
+    Key? key,
+    this.labelTextemail = 'Email Address',
+    required this.emailvalidatorFun,
+    required this.onSaved,
+    required this.focusNode,
+    required this.nextFocusNode,
   }) : super(key: key);
 
   @override
@@ -25,8 +25,8 @@ class BaseEmailFormField extends StatelessWidget {
     return BaseTextFormField(
       prefixIcon: const Icon(Icons.alternate_email),
       keyboardType: TextInputType.emailAddress,
-      labelText: labelTextemail ?? 'Email Address',
-      validator: emailvalidatorFun ?? emailValidator,
+      labelText: labelTextemail,
+      validator: emailValidator,
       onSaved: onSaved,
       focusNode: focusNode,
       onFieldSubmitted: (val) => fieldFocusChange(

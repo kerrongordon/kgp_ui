@@ -6,10 +6,10 @@ class BaseSwitch extends StatefulWidget {
   final void Function(bool) onChanged;
 
   const BaseSwitch({
-    Key key,
-    @required this.title,
-    @required this.init,
-    @required this.onChanged,
+    Key? key,
+    required this.title,
+    required this.init,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -17,18 +17,12 @@ class BaseSwitch extends StatefulWidget {
 }
 
 class _BaseSwitchState extends State<BaseSwitch> {
-  bool _toggle;
+  late bool _toggle;
 
   @override
   void initState() {
     super.initState();
     _toggle = widget.init;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _toggle = null;
   }
 
   @override

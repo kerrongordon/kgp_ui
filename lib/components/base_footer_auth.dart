@@ -6,10 +6,10 @@ class FooterAuth extends StatelessWidget {
   final String detail;
 
   const FooterAuth({
-    Key key,
-    this.onTap,
-    this.action,
-    this.detail,
+    Key? key,
+    required this.onTap,
+    required this.action,
+    required this.detail,
   }) : super(key: key);
 
   @override

@@ -3,24 +3,24 @@ import 'package:flutter/services.dart';
 import 'package:kgp_ui/components/base_screen_title.dart';
 
 class BaseScreen extends StatelessWidget {
-  final bool disableScroll;
+  final bool? disableScroll;
   final String title;
-  final double expandedHeight;
-  final Widget flexibleBackground;
-  final Widget child;
-  final double elevation;
-  final Color titleColor;
-  final Color backgroundColor;
-  final SystemUiOverlayStyle systemOverlayStyle;
-  final IconThemeData actionsIconTheme;
-  final IconThemeData iconTheme;
-  final ShapeBorder shape;
-  final List<Widget> actions;
+  final double? expandedHeight;
+  final Widget? flexibleBackground;
+  final Widget? child;
+  final double? elevation;
+  final Color? titleColor;
+  final Color? backgroundColor;
+  final SystemUiOverlayStyle? systemOverlayStyle;
+  final IconThemeData? actionsIconTheme;
+  final IconThemeData? iconTheme;
+  final ShapeBorder? shape;
+  final List<Widget>? actions;
 
   const BaseScreen({
-    Key key,
+    Key? key,
     this.disableScroll,
-    @required this.title,
+    required this.title,
     this.expandedHeight,
     this.flexibleBackground,
     this.elevation,
@@ -32,8 +32,7 @@ class BaseScreen extends StatelessWidget {
     this.actionsIconTheme,
     this.iconTheme,
     this.shape,
-  })  : assert(title != null, 'Title is required'),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,7 @@ class BaseScreen extends StatelessWidget {
           flexibleSpace: FlexibleSpaceBar(
             title: BaseTitle(
               title: title,
-              color: titleColor,
+              color: titleColor!,
             ),
             centerTitle: true,
             background: flexibleBackground,

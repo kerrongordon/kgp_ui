@@ -13,22 +13,22 @@ class BasePasswordRestAuth extends StatefulWidget {
   final String pageTitle;
 
   /// Page Text SubTitle "Password Rest"
-  final String pageSubTitle;
+  final String? pageSubTitle;
 
   /// Email Text Title "Email Address"
-  final String labelTextemail;
+  final String? labelTextemail;
 
   /// Email Validator using MultiValidator
-  final MultiValidator emailvalidatorFun;
+  final MultiValidator? emailvalidatorFun;
 
   /// Sign In Text title "Send"
-  final String labelTextSend;
+  final String? labelTextSend;
 
   /// Register Text title "Sign In"
-  final String labelTextSignIn;
+  final String? labelTextSignIn;
 
   /// Register detail Text title "Rmember your Password?"
-  final String labelTextSignIndetail;
+  final String? labelTextSignIndetail;
 
   /// Send Email Function Button
   /// GlobalKey<FormState> loginKey,
@@ -38,11 +38,11 @@ class BasePasswordRestAuth extends StatefulWidget {
     GlobalKey<FormState> resetKey,
     String email,
     BuildContext context,
-  }) onSendBtn;
+  })? onSendBtn;
 
   const BasePasswordRestAuth({
-    Key key,
-    this.pageTitle,
+    Key? key,
+    this.pageTitle = 'Forgot Your Password?',
     this.pageSubTitle,
     this.labelTextemail,
     this.emailvalidatorFun,
@@ -59,9 +59,9 @@ class BasePasswordRestAuth extends StatefulWidget {
 class _BasePasswordRestAuthState extends State<BasePasswordRestAuth> {
   final _resetKey = GlobalKey<FormState>();
 
-  String _email;
-  FocusNode _emailFoce;
-  FocusNode _submitFoce;
+  late String _email;
+  late FocusNode _emailFoce;
+  late FocusNode _submitFoce;
 
   @override
   void initState() {
@@ -83,7 +83,7 @@ class _BasePasswordRestAuthState extends State<BasePasswordRestAuth> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BaseScreen(
-        title: widget.pageTitle ?? 'Forgot Your Password?',
+        title: widget.pageTitle,
         titleColor: Colors.white,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Theme.of(context).primaryColor,
@@ -113,7 +113,7 @@ class _BasePasswordRestAuthState extends State<BasePasswordRestAuth> {
                   keyboardType: TextInputType.emailAddress,
                   labelText: widget.labelTextemail ?? 'Email address',
                   validator: widget.emailvalidatorFun ?? emailValidator,
-                  onSaved: (val) => _email = val,
+                  onSaved: (val) => _email = val!,
                   focusNode: _emailFoce,
                   onFieldSubmitted: (val) =>
                       fieldFocusChange(context, _emailFoce, _submitFoce),
@@ -125,7 +125,7 @@ class _BasePasswordRestAuthState extends State<BasePasswordRestAuth> {
                       focusNode: _submitFoce,
                       icon: const Icon(Icons.send),
                       label: Text(widget.labelTextSend ?? 'Send'),
-                      onPressed: () => widget.onSendBtn(
+                      onPressed: () => widget.onSendBtn!(
                         resetKey: _resetKey,
                         email: _email,
                         context: context,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:kgp_ui/core/base_email_form_field.dart';
 import 'package:kgp_ui/core/base_password_form_field.dart';
@@ -8,7 +7,7 @@ import '../../components/base_footer_auth.dart';
 import '../../validators/password-validator.dart';
 import '../base_screen.dart';
 
-class BaseRegisterAuth extends HookWidget {
+class BaseRegisterAuth extends StatefulWidget {
   /// Page Text Title "Register"
   final String pageTitle;
 
@@ -30,7 +29,7 @@ class BaseRegisterAuth extends HookWidget {
   /// Password Validator using MultiValidator
   final MultiValidator passwordvalidatorConfromFun;
 
-  BaseRegisterAuth({
+  const BaseRegisterAuth({
     Key key,
     this.pageTitle,
     this.labelTextemail,
@@ -41,26 +40,57 @@ class BaseRegisterAuth extends HookWidget {
     this.passwordvalidatorConfromFun,
   }) : super(key: key);
 
+  @override
+  State<BaseRegisterAuth> createState() => _BaseRegisterAuthState();
+}
+
+class _BaseRegisterAuthState extends State<BaseRegisterAuth> {
   final _registerKey = GlobalKey<FormState>();
+
+  String _email;
+  String _password;
+  String _passwordCon;
+  String _passwordOnChange;
+
+  FocusNode _emailFoce;
+  FocusNode _passwordFoce;
+  FocusNode _passwordConFoce;
+  FocusNode _submitFoce;
+
+  @override
+  void initState() {
+    super.initState();
+    _email = '';
+    _password = '';
+    _passwordCon = '';
+    _passwordOnChange = '';
+    _emailFoce = FocusNode();
+    _passwordFoce = FocusNode();
+    _passwordConFoce = FocusNode();
+    _submitFoce = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _email = '';
+    _password = '';
+    _passwordCon = '';
+    _passwordOnChange = '';
+    _emailFoce.dispose();
+    _passwordFoce.dispose();
+    _passwordConFoce.dispose();
+    _submitFoce.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final _email = useState<String>();
-    final _password = useState<String>();
-    final _passwordCon = useState<String>();
-    final _passwordOnChange = useState<String>();
-
-    final _emailFoce = useFocusNode();
-    final _passwordFoce = useFocusNode();
-    final _passwordConFoce = useFocusNode();
-    final _submitFoce = useFocusNode();
-
     return Scaffold(
       body: BaseScreen(
-        title: pageTitle ?? 'Register',
+        title: widget.pageTitle ?? 'Register',
         titleColor: Colors.white,
         brightness: Brightness.dark,
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         iconTheme: const IconThemeData(color: Colors.white),
         child: Container(
           padding: const EdgeInsets.all(20),
@@ -70,25 +100,25 @@ class BaseRegisterAuth extends HookWidget {
             child: Column(
               children: [
                 BaseEmailFormField(
-                  labelTextemail: labelTextemail,
-                  emailvalidatorFun: emailvalidatorFun,
-                  onSaved: (val) => _email.value = val,
+                  labelTextemail: widget.labelTextemail,
+                  emailvalidatorFun: widget.emailvalidatorFun,
+                  onSaved: (val) => _email = val,
                   focusNode: _emailFoce,
                   nextFocusNode: _passwordFoce,
                 ),
                 BasePasswordFormField(
-                  labelTextpassword: labelTextpassword,
-                  passwordvalidatorFun: passwordvalidatorFun,
-                  onSaved: (val) => _password.value = val,
-                  onChanged: (val) => _passwordOnChange.value = val,
+                  labelTextpassword: widget.labelTextpassword,
+                  passwordvalidatorFun: widget.passwordvalidatorFun,
+                  onSaved: (val) => _password = val,
+                  onChanged: (val) => _passwordOnChange = val,
                   focusNode: _passwordFoce,
                   nextFocusNode: _passwordConFoce,
                 ),
                 BasePasswordFormField(
-                  labelTextpassword: labelTextpasswordConfrom,
+                  labelTextpassword: widget.labelTextpasswordConfrom,
                   passwordvalidatorFun: (val) =>
-                      passwordCon(val, _passwordOnChange.value),
-                  onSaved: (val) => _passwordCon.value = val,
+                      passwordCon(val, _passwordOnChange),
+                  onSaved: (val) => _passwordCon = val,
                   focusNode: _passwordConFoce,
                   nextFocusNode: _submitFoce,
                 ),
@@ -104,9 +134,11 @@ class BaseRegisterAuth extends HookWidget {
                       _registerKey.currentState.save();
 
                       // ignore: avoid_print
-                      print(_email.value);
+                      print(_email);
                       // ignore: avoid_print
-                      print(_password.value);
+                      print(_password);
+                      // ignore: avoid_print
+                      print(_passwordCon);
                       _registerKey.currentState.reset();
                     },
                   ),

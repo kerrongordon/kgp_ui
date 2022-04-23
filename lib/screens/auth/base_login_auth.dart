@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../components/base_footer_auth.dart';
@@ -8,7 +7,7 @@ import '../../core/base_password_form_field.dart';
 import '../../screens/base_screen.dart';
 
 /// Kgp UI Base Login Screen
-class BaseLoginAuth extends HookWidget {
+class BaseLoginAuth extends StatefulWidget {
   /// Page Text Title "Sign In"
   final String pageTitle;
 
@@ -59,7 +58,7 @@ class BaseLoginAuth extends HookWidget {
     BuildContext context,
   }) onSignInBtn;
 
-  BaseLoginAuth({
+  const BaseLoginAuth({
     Key key,
     this.pageTitle,
     this.labelTextemail,
@@ -76,24 +75,49 @@ class BaseLoginAuth extends HookWidget {
     this.labelTextRegisterdetail,
   }) : super(key: key);
 
+  @override
+  State<BaseLoginAuth> createState() => _BaseLoginAuthState();
+}
+
+class _BaseLoginAuthState extends State<BaseLoginAuth> {
   final _loginKey = GlobalKey<FormState>();
+
+  bool _rememberMe = true;
+  String _email;
+  String _password;
+
+  FocusNode _emailFoce;
+  FocusNode _passwordFoce;
+  FocusNode _submitFoce;
+
+  @override
+  void initState() {
+    super.initState();
+    _email = '';
+    _password = '';
+    _emailFoce = FocusNode();
+    _passwordFoce = FocusNode();
+    _submitFoce = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _email = '';
+    _password = '';
+    _emailFoce.dispose();
+    _passwordFoce.dispose();
+    _submitFoce.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final _rememberMe = useState<bool>(true);
-    final _email = useState<String>();
-    final _password = useState<String>();
-
-    final _emailFoce = useFocusNode();
-    final _passwordFoce = useFocusNode();
-    final _submitFoce = useFocusNode();
-
     return Scaffold(
       body: BaseScreen(
-        title: pageTitle ?? 'Sign In',
+        title: widget.pageTitle ?? 'Sign In',
         titleColor: Colors.white,
         brightness: Brightness.dark,
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: Theme.of(context).primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         child: Container(
           padding: const EdgeInsets.all(20),
@@ -103,16 +127,16 @@ class BaseLoginAuth extends HookWidget {
             child: Column(
               children: [
                 BaseEmailFormField(
-                  labelTextemail: labelTextemail,
-                  emailvalidatorFun: emailvalidatorFun,
-                  onSaved: (val) => _email.value = val,
+                  labelTextemail: widget.labelTextemail,
+                  emailvalidatorFun: widget.emailvalidatorFun,
+                  onSaved: (val) => _email = val,
                   focusNode: _emailFoce,
                   nextFocusNode: _passwordFoce,
                 ),
                 BasePasswordFormField(
-                  labelTextpassword: labelTextpassword,
-                  passwordvalidatorFun: passwordvalidatorFun,
-                  onSaved: (val) => _password.value = val,
+                  labelTextpassword: widget.labelTextpassword,
+                  passwordvalidatorFun: widget.passwordvalidatorFun,
+                  onSaved: (val) => _password = val,
                   focusNode: _passwordFoce,
                   nextFocusNode: _submitFoce,
                 ),
@@ -124,13 +148,13 @@ class BaseLoginAuth extends HookWidget {
                       child: Row(
                         children: [
                           Switch(
-                            onChanged: (val) => _rememberMe.value = val,
-                            value: _rememberMe.value,
+                            onChanged: (val) => _rememberMe = val,
+                            value: _rememberMe,
                           ),
                           TextButton(
-                            onPressed: () =>
-                                _rememberMe.value = !_rememberMe.value,
-                            child: Text(labelTextRememberMe ?? 'Remember Me'),
+                            onPressed: () => _rememberMe = !_rememberMe,
+                            child: Text(
+                                widget.labelTextRememberMe ?? 'Remember Me'),
                           ),
                         ],
                       ),
@@ -138,9 +162,9 @@ class BaseLoginAuth extends HookWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                        onPressed: passwordResetBtn,
-                        child:
-                            Text(labelTextForgotPassword ?? 'Forgot Password?'),
+                        onPressed: widget.passwordResetBtn,
+                        child: Text(widget.labelTextForgotPassword ??
+                            'Forgot Password?'),
                       ),
                     ),
                   ],
@@ -151,21 +175,22 @@ class BaseLoginAuth extends HookWidget {
                     child: ElevatedButton.icon(
                       focusNode: _submitFoce,
                       icon: const Icon(Icons.vpn_key),
-                      label: Text(labelTextSignIn ?? 'Sign In'),
-                      onPressed: () => onSignInBtn(
+                      label: Text(widget.labelTextSignIn ?? 'Sign In'),
+                      onPressed: () => widget.onSignInBtn(
                         loginKey: _loginKey,
-                        email: _email.value,
-                        password: _password.value,
-                        rememberMe: _rememberMe.value,
+                        email: _email,
+                        password: _password,
+                        rememberMe: _rememberMe,
                         context: context,
                       ),
                     ),
                   ),
                 ),
                 FooterAuth(
-                  action: labelTextRegister ?? 'Register',
-                  detail: labelTextRegisterdetail ?? "Don't Have an Account?",
-                  onTap: registerBtn,
+                  action: widget.labelTextRegister ?? 'Register',
+                  detail: widget.labelTextRegisterdetail ??
+                      "Don't Have an Account?",
+                  onTap: widget.registerBtn,
                 ),
               ],
             ),

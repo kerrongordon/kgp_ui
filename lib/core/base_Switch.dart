@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
-class BaseSwitch extends HookWidget {
+class BaseSwitch extends StatefulWidget {
   final String title;
   final bool init;
   final void Function(bool) onChanged;
@@ -14,23 +13,41 @@ class BaseSwitch extends HookWidget {
   }) : super(key: key);
 
   @override
+  State<BaseSwitch> createState() => _BaseSwitchState();
+}
+
+class _BaseSwitchState extends State<BaseSwitch> {
+  bool _toggle;
+
+  @override
+  void initState() {
+    super.initState();
+    _toggle = widget.init;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _toggle = null;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final _toggle = useState<bool>(init);
     return Row(
       children: [
         Switch(
           onChanged: (val) {
-            _toggle.value = val;
-            onChanged(val);
+            _toggle = val;
+            widget.onChanged(val);
           },
-          value: _toggle.value,
+          value: _toggle,
         ),
         TextButton(
           onPressed: () {
-            _toggle.value = !_toggle.value;
-            onChanged(_toggle.value);
+            _toggle = !_toggle;
+            widget.onChanged(_toggle);
           },
-          child: Text(title),
+          child: Text(widget.title),
         ),
       ],
     );

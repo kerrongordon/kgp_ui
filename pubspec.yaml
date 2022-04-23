@@ -1,7 +1,6 @@
 name: kgp_ui
 description: A new Flutter package project.
 version: 1.0.0
-author: Kerron Gordon
 homepage: https://github.com/kerrongordon
 
 environment:
@@ -11,8 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  flutter_hooks: ^0.15.0
   form_field_validator: ^1.0.1
 
 dev_dependencies:

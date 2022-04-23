@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
-class BaseCheckboxListTile extends HookWidget {
+class BaseCheckboxListTile extends StatefulWidget {
   final Widget title;
   final Widget subtitle;
   final bool initial;
@@ -16,16 +15,34 @@ class BaseCheckboxListTile extends HookWidget {
   }) : super(key: key);
 
   @override
+  State<BaseCheckboxListTile> createState() => _BaseCheckboxListTileState();
+}
+
+class _BaseCheckboxListTileState extends State<BaseCheckboxListTile> {
+  bool _checkbox;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkbox = widget.initial ?? false;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _checkbox = null;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final _checkbox = useState<bool>(initial ?? false);
     return CheckboxListTile(
-      title: title,
-      subtitle: subtitle,
+      title: widget.title,
+      subtitle: widget.subtitle,
       onChanged: (value) {
-        _checkbox.value = value;
-        return onChanged(value);
+        _checkbox = value;
+        return widget.onChanged(value);
       },
-      value: _checkbox.value,
+      value: _checkbox,
     );
   }
 }

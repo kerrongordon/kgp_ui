@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:kgp_ui/components/base_footer_auth.dart';
 import 'package:kgp_ui/core/base_email_form_field.dart';
 import 'package:kgp_ui/core/base_password_form_field.dart';
-
-import '../../components/base_footer_auth.dart';
-import '../../validators/password-validator.dart';
-import '../base_screen.dart';
+import 'package:kgp_ui/screens/base_screen.dart';
+import 'package:kgp_ui/validators/password-validator.dart';
 
 class BaseRegisterAuth extends StatefulWidget {
   /// Page Text Title "Register"
@@ -89,7 +89,7 @@ class _BaseRegisterAuthState extends State<BaseRegisterAuth> {
       body: BaseScreen(
         title: widget.pageTitle ?? 'Register',
         titleColor: Colors.white,
-        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Theme.of(context).colorScheme.secondary,
         iconTheme: const IconThemeData(color: Colors.white),
         child: Container(

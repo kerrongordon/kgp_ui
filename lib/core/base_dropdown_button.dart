@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'base_card.dart';
+import 'package:kgp_ui/core/base_card.dart';
 
 class BaseDropdownButton extends StatefulWidget {
   final String initial;

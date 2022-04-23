@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 mixin KgpUiLight {
   static final ThemeData theme = _lightTheme();
-  static final Color _primaryColor = Colors.green;
+  static const Color _primaryColor = Colors.green;
   static const Color _backgroundColor = Color.fromRGBO(236, 240, 241, 1.0);
   static const Color _textColor = Color.fromRGBO(107, 124, 147, 1.0);
 
@@ -26,16 +27,17 @@ mixin KgpUiLight {
       color: _textColor,
     );
 
-    const AppBarTheme appBarTheme = AppBarTheme(
-      brightness: Brightness.light,
+    final AppBarTheme appBarTheme = AppBarTheme(
       color: _backgroundColor,
       elevation: 0,
-      textTheme: textTheme,
       actionsIconTheme: iconTheme,
       iconTheme: iconTheme,
+      toolbarTextStyle: textTheme.bodyText2,
+      titleTextStyle: textTheme.headline6,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
 
-    final FloatingActionButtonThemeData floatingActionButtonTheme =
+    const FloatingActionButtonThemeData floatingActionButtonTheme =
         FloatingActionButtonThemeData(
       backgroundColor: _primaryColor,
       elevation: 5.0,
@@ -52,7 +54,6 @@ mixin KgpUiLight {
     return ThemeData(
       primaryColor: _primaryColor,
       primaryColorLight: _textColor,
-      primaryColorBrightness: Brightness.light,
       textTheme: textTheme,
       scaffoldBackgroundColor: _backgroundColor,
       hintColor: _textColor,
@@ -64,7 +65,6 @@ mixin KgpUiLight {
       brightness: Brightness.light,
       backgroundColor: _backgroundColor,
       cardTheme: cardTheme,
-      accentColor: _primaryColor,
       inputDecorationTheme: const InputDecorationTheme(
         prefixStyle: TextStyle(
           color: _textColor,
@@ -95,6 +95,7 @@ mixin KgpUiLight {
           backgroundColor: MaterialStateProperty.all<Color>(_primaryColor),
         ),
       ),
+      colorScheme: ColorScheme.fromSwatch().copyWith(secondary: _primaryColor),
     );
   }
 }

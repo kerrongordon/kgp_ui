@@ -20,8 +20,12 @@ class BaseTextFormField extends StatelessWidget {
   final void Function(String) onFieldSubmitted;
   final bool autocorrect;
   final Iterable<String> autofillHints;
-  final Widget Function(BuildContext,
-      {int currentLength, bool isFocused, int maxLength}) buildCounter;
+  final Widget Function(
+    BuildContext, {
+    int currentLength,
+    bool isFocused,
+    int maxLength,
+  }) buildCounter;
   final Color cursorColor;
 
   const BaseTextFormField({
@@ -97,15 +101,12 @@ class BaseTextFormField extends StatelessWidget {
               errorText: errorText,
               fillColor: Theme.of(context).cardTheme.color,
               prefixText: prefixText,
-              contentPadding: const EdgeInsets.all(0),
+              contentPadding: EdgeInsets.zero,
               border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(30.0),
                 ),
-                borderSide: BorderSide(
-                  width: 0,
-                  style: BorderStyle.none,
-                ),
+                borderSide: BorderSide.none,
               ),
             ),
           ),

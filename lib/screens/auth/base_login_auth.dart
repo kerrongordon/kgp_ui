@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
-import '../../components/base_footer_auth.dart';
-import '../../core/base_email_form_field.dart';
-import '../../core/base_password_form_field.dart';
-import '../../screens/base_screen.dart';
+import 'package:kgp_ui/components/base_footer_auth.dart';
+import 'package:kgp_ui/core/base_email_form_field.dart';
+import 'package:kgp_ui/core/base_password_form_field.dart';
+import 'package:kgp_ui/screens/base_screen.dart';
 
 /// Kgp UI Base Login Screen
 class BaseLoginAuth extends StatefulWidget {
@@ -116,7 +116,7 @@ class _BaseLoginAuthState extends State<BaseLoginAuth> {
       body: BaseScreen(
         title: widget.pageTitle ?? 'Sign In',
         titleColor: Colors.white,
-        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Theme.of(context).primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         child: Container(
@@ -154,7 +154,8 @@ class _BaseLoginAuthState extends State<BaseLoginAuth> {
                           TextButton(
                             onPressed: () => _rememberMe = !_rememberMe,
                             child: Text(
-                                widget.labelTextRememberMe ?? 'Remember Me'),
+                              widget.labelTextRememberMe ?? 'Remember Me',
+                            ),
                           ),
                         ],
                       ),
@@ -163,8 +164,9 @@ class _BaseLoginAuthState extends State<BaseLoginAuth> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: widget.passwordResetBtn,
-                        child: Text(widget.labelTextForgotPassword ??
-                            'Forgot Password?'),
+                        child: Text(
+                          widget.labelTextForgotPassword ?? 'Forgot Password?',
+                        ),
                       ),
                     ),
                   ],

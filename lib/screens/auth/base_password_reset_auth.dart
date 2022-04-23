@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
-import '../../components/base_footer_auth.dart';
-import '../../core/base_text_form_field.dart';
-import '../../screens/base_screen.dart';
-import '../../utils/field-focus-change.dart';
-import '../../validators/email-validator.dart';
+import 'package:kgp_ui/components/base_footer_auth.dart';
+import 'package:kgp_ui/core/base_text_form_field.dart';
+import 'package:kgp_ui/screens/base_screen.dart';
+import 'package:kgp_ui/utils/field-focus-change.dart';
+import 'package:kgp_ui/validators/email-validator.dart';
 
 /// Kgp UI Base Password Rest
 class BasePasswordRestAuth extends StatefulWidget {
@@ -85,7 +85,7 @@ class _BasePasswordRestAuthState extends State<BasePasswordRestAuth> {
       body: BaseScreen(
         title: widget.pageTitle ?? 'Forgot Your Password?',
         titleColor: Colors.white,
-        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Theme.of(context).primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         child: Container(

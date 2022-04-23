@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../components/base_screen_title.dart';
+import 'package:flutter/services.dart';
+import 'package:kgp_ui/components/base_screen_title.dart';
 
 class BaseScreen extends StatelessWidget {
   final bool disableScroll;
@@ -10,7 +11,7 @@ class BaseScreen extends StatelessWidget {
   final double elevation;
   final Color titleColor;
   final Color backgroundColor;
-  final Brightness brightness;
+  final SystemUiOverlayStyle systemOverlayStyle;
   final IconThemeData actionsIconTheme;
   final IconThemeData iconTheme;
   final ShapeBorder shape;
@@ -26,7 +27,7 @@ class BaseScreen extends StatelessWidget {
     this.child,
     this.actions,
     this.titleColor,
-    this.brightness,
+    this.systemOverlayStyle,
     this.backgroundColor,
     this.actionsIconTheme,
     this.iconTheme,
@@ -45,7 +46,7 @@ class BaseScreen extends StatelessWidget {
           pinned: true,
           elevation: elevation,
           actions: actions,
-          brightness: brightness,
+          systemOverlayStyle: systemOverlayStyle,
           backgroundColor: backgroundColor,
           actionsIconTheme: actionsIconTheme,
           iconTheme: iconTheme,

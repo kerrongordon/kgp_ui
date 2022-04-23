@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
-import '../utils/field-focus-change.dart';
-import '../validators/email-validator.dart';
-import 'base_text_form_field.dart';
+import 'package:kgp_ui/core/base_text_form_field.dart';
+import 'package:kgp_ui/utils/field-focus-change.dart';
+import 'package:kgp_ui/validators/email-validator.dart';
 
 class BaseEmailFormField extends StatelessWidget {
   final String labelTextemail;

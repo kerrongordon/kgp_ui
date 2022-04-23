@@ -27,7 +27,7 @@ class FooterAuth extends StatelessWidget {
             Text(
               action,
               style: TextStyle(
-                color: theme.accentColor,
+                color: theme.primaryColor,
                 fontWeight: FontWeight.bold,
               ),
             ),

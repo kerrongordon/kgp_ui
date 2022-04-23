@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../utils/field-focus-change.dart';
-import '../validators/password-validator.dart';
-import 'base_text_form_field.dart';
+import 'package:kgp_ui/core/base_text_form_field.dart';
+import 'package:kgp_ui/utils/field-focus-change.dart';
+import 'package:kgp_ui/validators/password-validator.dart';
 
 class BasePasswordFormField extends StatelessWidget {
   final String labelTextpassword;

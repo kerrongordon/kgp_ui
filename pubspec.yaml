@@ -1,6 +1,6 @@
 name: kgp_ui
 description: A new Flutter package project.
-version: 1.0.0
+version: 1.5.0
 homepage: https://github.com/kerrongordon
 
 environment:
@@ -10,13 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  form_field_validator: ^1.0.1
+  form_field_validator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  lint: ^1.3.0
+  lint: ^1.8.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
